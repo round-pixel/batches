@@ -3,7 +3,6 @@
 require 'sinatra'
 require 'fileutils'
 require 'sinatra/activerecord'
-require 'pry'
 
 APP_ROOT = File.dirname(__FILE__)
 
