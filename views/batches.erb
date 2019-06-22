@@ -1,6 +1,11 @@
 <h3>Списки посылок</h3>
-
-<hr/>
+  <% @batches.each do |batch|%>
+    <%= "File GUID: #{batch.batch_file.guid}"%>
+    <br/>
+    <%= "BatchID: #{batch.batch_id}"%>
+    <hr/>
+  <% end %>
+<br/>
 <h3>Загрузить новый список посылок</h3>
 <form action='/upload' enctype="multipart/form-data" method='POST'>
    <input name="file" type="file" />
