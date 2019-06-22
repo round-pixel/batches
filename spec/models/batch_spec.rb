@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Batch, type: :model do
+  describe 'columns' do
+    it { have_db_column(:batchid).of_type(:string) }
+  end
+
   describe 'associations' do
     it { should belong_to(:batch_file).class_name('BatchFile') }
+    it { should have_many(:invoices).class_name('Invoice') }
   end
 
   describe 'validations' do

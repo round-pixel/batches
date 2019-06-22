@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe BatchFile, type: :model do
+  describe 'columns' do
+    it { have_db_column(:guid).of_type(:string) }
+  end
+
   describe 'associations' do
     it { should have_one(:batch).class_name('Batch') }
   end

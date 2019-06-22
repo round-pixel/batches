@@ -6,3 +6,7 @@ Documentation:
 
 Style/RescueStandardError:
   Enabled: false
+
+AllCops:
+  Exclude:
+    - db/schema.rb
