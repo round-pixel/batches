@@ -6,7 +6,7 @@ RSpec.describe BatchFile, type: :model do
   end
 
   describe 'associations' do
-    it { should have_one(:batch).class_name('Batch') }
+    it { should have_one(:batch).class_name('Batch').dependent(:destroy) }
   end
 
   describe 'validations' do

@@ -7,7 +7,7 @@ RSpec.describe Batch, type: :model do
 
   describe 'associations' do
     it { should belong_to(:batch_file).class_name('BatchFile') }
-    it { should have_many(:invoices).class_name('Invoice') }
+    it { should have_many(:invoices).class_name('Invoice').dependent(:destroy) }
   end
 
   describe 'validations' do
