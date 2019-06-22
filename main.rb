@@ -27,12 +27,25 @@ post '/upload' do
   doc = Nokogiri::XML(xml)
 
   ApplicationBase.transaction do
-    batch_file = BatchFile.create(guid: doc.xpath('//FileAttribute//GUID').text)
-    Batch.create(
-      batchid: doc.xpath('//FileData//Batch//BatchID').text,
+    batch_file = BatchFile.create!(
+      guid: doc.xpath('//FileAttribute//GUID').text,
+      filename: filename
+    )
+
+    batch = Batch.create!(
+      batchid: doc.xpath('//FileData//Batch//BatchID').text.to_i,
       creation_date: doc.xpath('//FileData//Batch//CreationDate').text,
       batch_file: batch_file
     )
+
+    doc.xpath('//FileData//Invoice').each do |invoice|
+      _invoice = Invoice.create!(
+        operation_date: invoice.xpath('.//InvoiceOperation//InvoiceOperationDate').text,
+        operation_number: invoice.xpath('.//InvoiceOperation//InvoiceOperationNumber').text.to_i,
+        company_code: invoice.xpath('.//InvoiceOperation//CompanyCode').text.to_i,
+        batch: batch
+      )
+    end
   end
 
   redirect '/'

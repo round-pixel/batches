@@ -3,6 +3,16 @@
     <%= "File GUID: #{batch.batch_file.guid}"%>
     <br/>
     <%= "BatchID: #{batch.batchid}"%>
+    <h4>Invoices</h4>
+    <% batch.invoices.each do |invoice|%>
+      <%= "* OperationDate: #{invoice.operation_date}"%>
+      <br/>
+      <%= "* OperationNumber: #{invoice.operation_number}"%>
+      <br/>
+      <%= "* CompanyCode: #{invoice.company_code}"%>
+      <br/>
+      <br/>
+    <% end %>
   <% end %>
 <hr/>
 <h3>Загрузить новый список посылок</h3>

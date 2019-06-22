@@ -13,10 +13,10 @@ RSpec.describe Invoice, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:operation_number) }
+    it { should validate_uniqueness_of(:operation_number) }
+    it { should validate_numericality_of(:operation_number).is_less_than(1_000_000_000) }
 
     it { should validate_presence_of(:operation_date) }
-    it { should validate_uniqueness_of(:operation_date) }
-    it { should validate_numericality_of(:operation_date).is_less_than(1_000_000_000) }
 
     it { should validate_presence_of(:company_code) }
     it { should validate_presence_of(:company_code) }
