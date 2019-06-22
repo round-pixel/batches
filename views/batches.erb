@@ -3,16 +3,29 @@
     <%= "File GUID: #{batch.batch_file.guid}"%>
     <br/>
     <%= "BatchID: #{batch.batchid}"%>
-    <h4>Invoices</h4>
-    <% batch.invoices.each do |invoice|%>
-      <%= "* OperationDate: #{invoice.operation_date}"%>
-      <br/>
-      <%= "* OperationNumber: #{invoice.operation_number}"%>
-      <br/>
-      <%= "* CompanyCode: #{invoice.company_code}"%>
-      <br/>
-      <br/>
-    <% end %>
+    <div style="background-color:#EEE">
+      <% batch.invoices.each_with_index do |invoice, i|%>
+        <h4><%= "Invoice #{i + 1}"%></h4>
+        <%= "OperationDate: #{invoice.operation_date}"%>
+        <br/>
+        <%= "OperationNumber: #{invoice.operation_number}"%>
+        <br/>
+        <%= "CompanyCode: #{invoice.company_code}"%>
+        <br/>
+        <h5>Parcels</h5>
+        <div style="margin-left:20px;">
+          <% invoice.invoice_datas.each do |invoice_data|%>
+              <%= "- ParcelCode: #{invoice_data.parcel_code}"%>
+              <br/>
+              <%= "- ParcelPrice: #{invoice_data.parcel_price}"%>
+              <br/>
+              <%= "- ItemQty: #{invoice_data.item_qty}"%>
+              <br/>
+              <br/>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 <hr/>
 <h3>Загрузить новый список посылок</h3>
