@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_22_201131) do
+ActiveRecord::Schema.define(version: 2019_06_22_210542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 2019_06_22_201131) do
     t.index ["batchid"], name: "index_batches_on_batchid"
   end
 
+  create_table "invoice_datas", force: :cascade do |t|
+    t.string "parcel_code"
+    t.integer "parcel_price"
+    t.integer "item_qty"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "invoice_id"
+    t.index ["invoice_id"], name: "index_invoice_datas_on_invoice_id"
+    t.index ["parcel_code"], name: "index_invoice_datas_on_parcel_code"
+  end
+
   create_table "invoices", force: :cascade do |t|
     t.integer "operation_number"
     t.date "operation_date"
@@ -45,5 +56,6 @@ ActiveRecord::Schema.define(version: 2019_06_22_201131) do
   end
 
   add_foreign_key "batches", "batch_files"
+  add_foreign_key "invoice_datas", "invoices"
   add_foreign_key "invoices", "batches"
 end

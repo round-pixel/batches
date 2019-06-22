@@ -8,6 +8,7 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'associations' do
+    it { should have_many(:invoice_datas).class_name('InvoiceData').dependent(:destroy) }
     it { should belong_to(:batch).class_name('Batch') }
   end
 

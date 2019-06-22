@@ -3,6 +3,7 @@
 require_relative 'application_base'
 
 class Invoice < ApplicationBase
+  has_many :invoice_datas, dependent: :destroy
   belongs_to :batch
 
   validates :operation_number, presence: true,

@@ -27,6 +27,10 @@ post '/upload' do
   doc = Nokogiri::XML(xml)
 
   ApplicationBase.transaction do
+    invoice_data_size = doc.xpath('//FileData//Invoice//InvoiceData').size
+    raise ActiveRecord::Rollback, "InvoiceData must be greater than 1 or less than 10" if \
+      invoice_data_size < 1 or invoice_data_size > 10
+
     batch_file = BatchFile.create!(
       guid: doc.xpath('//FileAttribute//GUID').text,
       filename: filename
@@ -45,7 +49,19 @@ post '/upload' do
         company_code: invoice.xpath('.//InvoiceOperation//CompanyCode').text.to_i,
         batch: batch
       )
+
+      invoice.xpath('.//InvoiceData').each do |invoice_data|
+        InvoiceData.create!(
+          parcel_code: invoice_data.xpath('.//ParcelCode').text,
+          parcel_price: invoice_data.xpath('.//ParcelPrice').text.to_i,
+          item_qty: invoice_data.xpath('.//ItemQty').text.to_i,
+          invoice: _invoice
+        )
+      end
     end
+  rescue => e
+    # TODO flash messages
+    puts e
   end
 
   redirect '/'
