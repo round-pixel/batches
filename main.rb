@@ -3,12 +3,14 @@
 require 'sinatra'
 require 'fileutils'
 require 'sinatra/activerecord'
+require 'pry'
+
+APP_ROOT = File.dirname(__FILE__)
 
 # load all Models
-Dir[File.dirname(__FILE__) + 'models/*.rb'].each { |file| require file }
+Dir[File.join(APP_ROOT, 'models', '*.rb')].each { |file| require file }
 
-set(:root, File.dirname(__FILE__))
-set(:views, proc { File.join(root, 'views') })
+set(:views, proc { File.join(APP_ROOT, 'views') })
 set(:port, 3000)
 set(:database_file, 'config/database.yml')
 
