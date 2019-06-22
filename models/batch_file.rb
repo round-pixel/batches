@@ -1,0 +1,2 @@
+class BatchFile < ApplicationBase
+end

@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: 'localhost'
+  user: 'user'
+  password: 'secret'
+  pool: 5
+
+development:
+  <<: *default
+  database: parcels_development
+
+test:
+  <<: *default
+  database: parcels_test
