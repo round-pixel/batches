@@ -1,6 +1,9 @@
 Metrics/LineLength:
   Max: 100
 
+Metrics/BlockLength:
+  Max: 40
+  
 Documentation:
   Enabled: false
 
@@ -8,5 +11,6 @@ Style/RescueStandardError:
   Enabled: false
 
 AllCops:
+  TargetRubyVersion: 2.5
   Exclude:
     - db/schema.rb

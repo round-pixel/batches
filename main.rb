@@ -28,8 +28,8 @@ post '/upload' do
 
   ApplicationBase.transaction do
     invoice_data_size = doc.xpath('//FileData//Invoice//InvoiceData').size
-    raise ActiveRecord::Rollback, "InvoiceData must be greater than 1 or less than 10" if \
-      invoice_data_size < 1 or invoice_data_size > 10
+    raise ActiveRecord::Rollback, 'InvoiceData must be greater than 1 or less than 10' if \
+      (invoice_data_size < 1) || (invoice_data_size > 10)
 
     batch_file = BatchFile.create!(
       guid: doc.xpath('//FileAttribute//GUID').text,
@@ -43,7 +43,7 @@ post '/upload' do
     )
 
     doc.xpath('//FileData//Invoice').each do |invoice|
-      _invoice = Invoice.create!(
+      inv = Invoice.create!(
         operation_date: invoice.xpath('.//InvoiceOperation//InvoiceOperationDate').text,
         operation_number: invoice.xpath('.//InvoiceOperation//InvoiceOperationNumber').text.to_i,
         company_code: invoice.xpath('.//InvoiceOperation//CompanyCode').text.to_i,
@@ -55,12 +55,12 @@ post '/upload' do
           parcel_code: invoice_data.xpath('.//ParcelCode').text,
           parcel_price: invoice_data.xpath('.//ParcelPrice').text.to_i,
           item_qty: invoice_data.xpath('.//ItemQty').text.to_i,
-          invoice: _invoice
+          invoice: inv
         )
       end
     end
   rescue => e
-    # TODO flash messages
+    # TODO: flash messages
     puts e
   end
 
