@@ -37,3 +37,9 @@ post '/upload' do
 
   redirect '/'
 end
+
+post '/clear' do
+  BatchFile.destroy_all
+
+  redirect '/'
+end
