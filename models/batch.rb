@@ -5,5 +5,5 @@ require_relative 'application_base'
 class Batch < ApplicationBase
   belongs_to :batch_file
 
-  validates :batch_id, presence: true, uniqueness: true
+  validates :batchid, presence: true, uniqueness: true
 end

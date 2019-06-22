@@ -9,4 +9,8 @@ RSpec.describe BatchFile, type: :model do
     it { should validate_presence_of(:guid) }
     it { should validate_uniqueness_of(:guid) }
   end
+
+  describe 'indexes' do
+    it { should have_db_index(:guid) }
+  end
 end

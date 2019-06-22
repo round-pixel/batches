@@ -29,7 +29,7 @@ post '/upload' do
   ApplicationBase.transaction do
     batch_file = BatchFile.create(guid: doc.xpath('//FileAttribute//GUID').text)
     Batch.create(
-      batch_id: doc.xpath('//FileData//Batch//BatchID').text,
+      batchid: doc.xpath('//FileData//Batch//BatchID').text,
       creation_date: doc.xpath('//FileData//Batch//CreationDate').text,
       batch_file: batch_file
     )

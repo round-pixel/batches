@@ -2,6 +2,7 @@
 
 class AddUniqueBatchIdIndexToBatches < ActiveRecord::Migration[5.2]
   def change
-    change_column :batches, :batch_id, :integer, unique: true
+    change_column :batches, :batchid, :integer, unique: true
+    add_index :batches, :batchid
   end
 end

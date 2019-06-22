@@ -21,15 +21,17 @@ ActiveRecord::Schema.define(version: 20_190_622_154_111) do
     t.string 'filename'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.index ['guid'], name: 'index_batch_files_on_guid'
   end
 
   create_table 'batches', force: :cascade do |t|
-    t.integer 'batch_id'
+    t.integer 'batchid'
     t.date 'creation_date'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.bigint 'batch_file_id'
     t.index ['batch_file_id'], name: 'index_batches_on_batch_file_id'
+    t.index ['batchid'], name: 'index_batches_on_batchid'
   end
 
   add_foreign_key 'batches', 'batch_files'

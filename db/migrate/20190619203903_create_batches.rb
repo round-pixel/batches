@@ -3,7 +3,7 @@
 class CreateBatches < ActiveRecord::Migration[5.2]
   def change
     create_table :batches do |t|
-      t.integer :batch_id
+      t.integer :batchid
       t.date :creation_date
 
       t.timestamps
